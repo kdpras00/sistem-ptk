@@ -4,8 +4,8 @@
 
 @section('content')
 <div class="mb-4">
-    <h1 class="text-3xl font-bold text-gray-900">Data Diri PTK</h1>
-    <p class="text-gray-600">Informasi lengkap data diri Anda</p>
+    <h1 class="text-3xl font-bold text-white">Data Diri PTK</h1>
+    <p class="text-white">Informasi lengkap data diri Anda</p>
 </div>
 
 @if(isset($ptk))

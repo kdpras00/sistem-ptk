@@ -4,8 +4,8 @@
 
 @section('content')
 <div class="mb-4">
-    <h1 class="text-3xl font-bold text-gray-900">Edit Dokumen</h1>
-    <p class="text-gray-600">Perbarui informasi dokumen</p>
+    <h1 class="text-3xl font-bold text-white">Edit Dokumen</h1>
+    <p class="text-white">Perbarui informasi dokumen</p>
 </div>
 
 <div class="bg-white rounded-lg shadow-md p-6">

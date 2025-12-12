@@ -5,14 +5,14 @@
 @section('content')
 <div class="mb-6">
     <div class="flex items-center mb-4">
-        <a href="{{ route('admin.categories.index') }}" class="mr-4 text-gray-600 hover:text-gray-900">
+        <a href="{{ route('admin.categories.index') }}" class="mr-4 text-white hover:text-gray-900">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
             </svg>
         </a>
         <div>
-            <h1 class="text-3xl font-bold text-gray-900">Tambah Kategori Dokumen</h1>
-            <p class="text-gray-600">Buat kategori baru untuk pengarsipan dokumen</p>
+            <h1 class="text-3xl font-bold text-white">Tambah Kategori Dokumen</h1>
+            <p class="text-white">Buat kategori baru untuk pengarsipan dokumen</p>
         </div>
     </div>
 </div>
@@ -29,7 +29,7 @@
                 </label>
                 <input type="text" name="kode_kategori" id="kode_kategori" value="{{ old('kode_kategori') }}" 
                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('kode_kategori') border-red-500 @enderror" 
-                       placeholder="contoh: SKP, DIKLAT, SURAT" required>
+                       placeholder="contoh: SK-001, IJZ-001, SRT-001" required>
                 <p class="mt-1 text-sm text-gray-500">Kode unik untuk kategori (huruf besar tanpa spasi)</p>
                 @error('kode_kategori')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -43,7 +43,7 @@
                 </label>
                 <input type="text" name="nama_kategori" id="nama_kategori" value="{{ old('nama_kategori') }}" 
                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('nama_kategori') border-red-500 @enderror" 
-                       placeholder="contoh: Surat Keterangan Pengalaman" required>
+                       placeholder="contoh: SK pengangkatan, ijazah" required>
                 @error('nama_kategori')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                 @enderror

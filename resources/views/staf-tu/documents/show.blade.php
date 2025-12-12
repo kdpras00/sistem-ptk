@@ -5,7 +5,7 @@
 @section('content')
 <div class="mb-4 flex justify-between items-center">
     <div>
-        <h1 class="text-3xl font-bold text-gray-900">Detail Dokumen</h1>
+        <h1 class="text-3xl font-bold text-white">Detail Dokumen</h1>
         <p class="text-white">Informasi lengkap dokumen</p>
     </div>
     <div class="flex gap-2">

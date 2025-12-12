@@ -23,11 +23,11 @@ return new class extends Migration
             $table->text('alamat');
             $table->string('no_telepon', 20)->nullable();
             $table->string('email')->nullable();
-            $table->enum('status_kepegawaian', ['PNS', 'PPPK', 'GTT', 'PTT', 'Honorer']);
-            $table->string('jabatan');
-            $table->string('pangkat_golongan')->nullable();
+            $table->enum('status_kepegawaian', ['PNS', 'PPPK', 'GTT', 'GTY', 'Honorer']);
+            $table->enum('jabatan', ['Kepala Sekolah', 'Wakil Kepala Sekolah', 'Bendahara Sekolah', 'Wakasek Kurikulum', 'Wakasek Kesiswaan', 'Guru Mapel', 'Tenaga Kependidikan']);
+            $table->enum('pangkat_golongan', ['III/a', 'III/b', 'III/c', 'III/d', 'IV/a', 'IV/b', 'IV/c', 'IV/d', 'IV/e', 'GTY', 'GTT'])->nullable();
             $table->date('tmt_pengangkatan')->nullable();
-            $table->string('pendidikan_terakhir');
+            $table->enum('pendidikan_terakhir', ['SD', 'SMP', 'SMA', 'D1', 'D2', 'D3', 'D4', 'S1', 'S2', 'S3']);
             $table->string('jurusan')->nullable();
             $table->string('foto')->nullable();
             $table->timestamps();

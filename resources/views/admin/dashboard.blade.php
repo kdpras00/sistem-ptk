@@ -5,7 +5,7 @@
 @section('content')
 <div class="mb-4">
     <h1 class="text-3xl font-bold text-white">Dashboard Admin</h1>
-    <p class="text-gray-200">Selamat datang, {{ auth()->user()->name }}</p>
+    <p class="text-white">Selamat datang, {{ auth()->user()->name }}</p>
 </div>
 
 <!-- Stats Cards -->

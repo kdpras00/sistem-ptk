@@ -4,8 +4,8 @@
 
 @section('content')
 <div class="mb-4">
-    <h1 class="text-3xl font-bold text-gray-900">Upload Dokumen Baru</h1>
-    <p class="text-gray-600">Tambahkan dokumen PTK baru ke sistem</p>
+    <h1 class="text-3xl font-bold text-white">Upload Dokumen Baru</h1>
+    <p class="text-white">Tambahkan dokumen PTK baru ke sistem</p>
 </div>
 
 <div class="bg-white rounded-lg shadow-md p-6">

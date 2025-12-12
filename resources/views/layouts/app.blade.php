@@ -87,11 +87,6 @@
                             </div>
                             <ul class="py-1" role="none">
                                 <li>
-                                    <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
-                                        Edit Profil
-                                    </a>
-                                </li>
-                                <li>
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
                                         <button type="submit" class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">

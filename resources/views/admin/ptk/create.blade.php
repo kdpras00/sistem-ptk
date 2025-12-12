@@ -5,14 +5,14 @@
 @section('content')
 <div class="mb-6">
     <div class="flex items-center mb-4">
-        <a href="{{ route('admin.ptk.index') }}" class="mr-4 text-gray-600 hover:text-gray-900">
+        <a href="{{ route('admin.ptk.index') }}" class="mr-4 text-white hover:text-gray-900">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
             </svg>
         </a>
         <div>
-            <h1 class="text-3xl font-bold text-gray-900">Tambah Data PTK</h1>
-            <p class="text-gray-600">Lengkapi form di bawah untuk menambahkan PTK baru</p>
+            <h1 class="text-3xl font-bold text-white">Tambah Data PTK</h1>
+            <p class="text-white">Lengkapi form di bawah untuk menambahkan PTK baru</p>
         </div>
     </div>
 </div>
@@ -79,9 +79,11 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label for="nip" class="block mb-2 text-sm font-medium text-gray-900">NIP <span class="text-red-500">*</span></label>
+                    <label for="nip" class="block mb-2 text-sm font-medium text-gray-900">NIP/Kode Pegawai <span class="text-red-500">*</span></label>
                     <input type="text" name="nip" id="nip" value="{{ old('nip') }}" 
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('nip') border-red-500 @enderror" 
+                           maxlength="18"
+                           oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 18)"
                            required>
                     @error('nip')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -91,7 +93,9 @@
                 <div>
                     <label for="nuptk" class="block mb-2 text-sm font-medium text-gray-900">NUPTK</label>
                     <input type="text" name="nuptk" id="nuptk" value="{{ old('nuptk') }}" 
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('nuptk') border-red-500 @enderror">
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('nuptk') border-red-500 @enderror"
+                           maxlength="18"
+                           oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 18)">
                     @error('nuptk')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
@@ -185,8 +189,7 @@
                         <option value="">Pilih Status</option>
                         <option value="PNS" {{ old('status_kepegawaian') == 'PNS' ? 'selected' : '' }}>PNS</option>
                         <option value="PPPK" {{ old('status_kepegawaian') == 'PPPK' ? 'selected' : '' }}>PPPK</option>
-                        <option value="GTT" {{ old('status_kepegawaian') == 'GTT' ? 'selected' : '' }}>GTT</option>
-                        <option value="PTT" {{ old('status_kepegawaian') == 'PTT' ? 'selected' : '' }}>PTT</option>
+                        <option value="GTY" {{ old('status_kepegawaian') == 'GTY' ? 'selected' : '' }}>GTY</option>
                         <option value="Honorer" {{ old('status_kepegawaian') == 'Honorer' ? 'selected' : '' }}>Honorer</option>
                     </select>
                     @error('status_kepegawaian')
@@ -196,9 +199,14 @@
 
                 <div>
                     <label for="jabatan" class="block mb-2 text-sm font-medium text-gray-900">Jabatan <span class="text-red-500">*</span></label>
-                    <input type="text" name="jabatan" id="jabatan" value="{{ old('jabatan') }}" 
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('jabatan') border-red-500 @enderror" 
-                           required>
+                    <select name="jabatan" id="jabatan" 
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('jabatan') border-red-500 @enderror" 
+                            required>
+                        <option value="">Pilih Jabatan</option>
+                        @foreach(['Kepala Sekolah', 'Wakil Kepala Sekolah', 'Bendahara Sekolah', 'Wakasek Kurikulum', 'Wakasek Kesiswaan', 'Guru Mapel', 'Tenaga Kependidikan'] as $jbt)
+                            <option value="{{ $jbt }}" {{ old('jabatan') == $jbt ? 'selected' : '' }}>{{ $jbt }}</option>
+                        @endforeach
+                    </select>
                     @error('jabatan')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
@@ -206,8 +214,13 @@
 
                 <div>
                     <label for="pangkat_golongan" class="block mb-2 text-sm font-medium text-gray-900">Pangkat/Golongan</label>
-                    <input type="text" name="pangkat_golongan" id="pangkat_golongan" value="{{ old('pangkat_golongan') }}" 
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('pangkat_golongan') border-red-500 @enderror">
+                    <select name="pangkat_golongan" id="pangkat_golongan" 
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('pangkat_golongan') border-red-500 @enderror">
+                        <option value="">Pilih Pangkat/Golongan</option>
+                        @foreach(['III/a', 'III/b', 'III/c', 'III/d', 'IV/a', 'IV/b', 'IV/c', 'IV/d', 'IV/e', 'GTY', 'GTT'] as $pg)
+                            <option value="{{ $pg }}" {{ old('pangkat_golongan') == $pg ? 'selected' : '' }}>{{ $pg }}</option>
+                        @endforeach
+                    </select>
                     @error('pangkat_golongan')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
@@ -231,9 +244,14 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label for="pendidikan_terakhir" class="block mb-2 text-sm font-medium text-gray-900">Pendidikan Terakhir <span class="text-red-500">*</span></label>
-                    <input type="text" name="pendidikan_terakhir" id="pendidikan_terakhir" value="{{ old('pendidikan_terakhir') }}" 
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('pendidikan_terakhir') border-red-500 @enderror" 
-                           required>
+                    <select name="pendidikan_terakhir" id="pendidikan_terakhir" 
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('pendidikan_terakhir') border-red-500 @enderror" 
+                            required>
+                        <option value="">Pilih Pendidikan</option>
+                        @foreach(['SD', 'SMP', 'SMA', 'D1', 'D2', 'D3', 'D4', 'S1', 'S2', 'S3'] as $pd)
+                            <option value="{{ $pd }}" {{ old('pendidikan_terakhir') == $pd ? 'selected' : '' }}>{{ $pd }}</option>
+                        @endforeach
+                    </select>
                     @error('pendidikan_terakhir')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
