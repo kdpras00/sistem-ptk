@@ -28,7 +28,7 @@
             <option value="PNS" {{ request('status_kepegawaian') == 'PNS' ? 'selected' : '' }}>PNS</option>
             <option value="PPPK" {{ request('status_kepegawaian') == 'PPPK' ? 'selected' : '' }}>PPPK</option>
             <option value="GTT" {{ request('status_kepegawaian') == 'GTT' ? 'selected' : '' }}>GTT</option>
-            <option value="PTT" {{ request('status_kepegawaian') == 'PTT' ? 'selected' : '' }}>PTT</option>
+            <option value="GTY" {{ request('status_kepegawaian') == 'GTY' ? 'selected' : '' }}>GTY</option>
             <option value="Honorer" {{ request('status_kepegawaian') == 'Honorer' ? 'selected' : '' }}>Honorer</option>
         </select>
 
