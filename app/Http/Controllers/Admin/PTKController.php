@@ -71,7 +71,7 @@ class PTKController extends Controller
             'tmt_pengangkatan' => 'nullable|date',
             'pendidikan_terakhir' => 'required|in:SD,SMP,SMA,D1,D2,D3,D4,S1,S2,S3',
             'jurusan' => 'nullable|string',
-            'foto' => 'nullable|image|max:2048',
+            'foto' => 'nullable|mimes:jpeg,jpg|max:2048',
         ]);
 
         // Create user
@@ -157,7 +157,7 @@ class PTKController extends Controller
             'tmt_pengangkatan' => 'nullable|date',
             'pendidikan_terakhir' => 'required|in:SD,SMP,SMA,D1,D2,D3,D4,S1,S2,S3',
             'jurusan' => 'nullable|string',
-            'foto' => 'nullable|image|max:2048',
+            'foto' => 'nullable|mimes:jpeg,jpg|max:2048',
         ]);
 
         // Update user

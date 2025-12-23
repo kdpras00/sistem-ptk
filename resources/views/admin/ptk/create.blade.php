@@ -30,6 +30,7 @@
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nama Pengguna <span class="text-red-500">*</span></label>
                     <input type="text" name="name" id="name" value="{{ old('name') }}" 
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('name') border-red-500 @enderror" 
+                           oninput="this.value = this.value.replace(/[0-9]/g, '')"
                            required>
                     @error('name')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -48,9 +49,21 @@
 
                 <div>
                     <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Password <span class="text-red-500">*</span></label>
-                    <input type="password" name="password" id="password" 
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('password') border-red-500 @enderror" 
-                           required>
+                    <div class="relative">
+                        <input type="password" name="password" id="password" 
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 pr-10 @error('password') border-red-500 @enderror" 
+                               required>
+                        <button type="button" onclick="togglePasswordVisibility('password', this)" 
+                                class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 hover:text-gray-700">
+                            <svg class="w-5 h-5 eye-open" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                            <svg class="w-5 h-5 eye-closed hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29" />
+                            </svg>
+                        </button>
+                    </div>
                     @error('password')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
@@ -105,6 +118,7 @@
                     <label for="nama_lengkap" class="block mb-2 text-sm font-medium text-gray-900">Nama Lengkap <span class="text-red-500">*</span></label>
                     <input type="text" name="nama_lengkap" id="nama_lengkap" value="{{ old('nama_lengkap') }}" 
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('nama_lengkap') border-red-500 @enderror" 
+                           oninput="this.value = this.value.replace(/[0-9]/g, '')"
                            required>
                     @error('nama_lengkap')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -148,7 +162,9 @@
                 <div>
                     <label for="no_telepon" class="block mb-2 text-sm font-medium text-gray-900">No. Telepon</label>
                     <input type="text" name="no_telepon" id="no_telepon" value="{{ old('no_telepon') }}" 
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('no_telepon') border-red-500 @enderror">
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('no_telepon') border-red-500 @enderror"
+                           maxlength="12"
+                           oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 12)">
                     @error('no_telepon')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
@@ -166,9 +182,9 @@
 
                 <div>
                     <label for="foto" class="block mb-2 text-sm font-medium text-gray-900">Foto</label>
-                    <input type="file" name="foto" id="foto" accept="image/*" 
+                    <input type="file" name="foto" id="foto" accept="image/jpeg,image/jpg" 
                            class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none @error('foto') border-red-500 @enderror">
-                    <p class="mt-1 text-sm text-gray-500">PNG, JPG, JPEG (MAX. 2MB)</p>
+                    <p class="mt-1 text-sm text-gray-500">JPG, JPEG (MAX. 2MB)</p>
                     @error('foto')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
@@ -261,7 +277,8 @@
                 <div>
                     <label for="jurusan" class="block mb-2 text-sm font-medium text-gray-900">Jurusan</label>
                     <input type="text" name="jurusan" id="jurusan" value="{{ old('jurusan') }}" 
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('jurusan') border-red-500 @enderror">
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('jurusan') border-red-500 @enderror"
+                           oninput="this.value = this.value.replace(/[0-9]/g, '')">
                     @error('jurusan')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
@@ -282,5 +299,23 @@
         </div>
     </form>
 </div>
+
+<script>
+function togglePasswordVisibility(inputId, button) {
+    const input = document.getElementById(inputId);
+    const eyeOpen = button.querySelector('.eye-open');
+    const eyeClosed = button.querySelector('.eye-closed');
+    
+    if (input.type === 'password') {
+        input.type = 'text';
+        eyeOpen.classList.add('hidden');
+        eyeClosed.classList.remove('hidden');
+    } else {
+        input.type = 'password';
+        eyeOpen.classList.remove('hidden');
+        eyeClosed.classList.add('hidden');
+    }
+}
+</script>
 @endsection
 

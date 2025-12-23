@@ -64,7 +64,7 @@ class DocumentController extends Controller
             'nama_dokumen' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
             'tanggal_dokumen' => 'required|date',
-            'file' => 'required|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:10240', // 10MB max
+            'file' => 'required|file|mimes:pdf,jpg,jpeg|max:10240', // 10MB max
         ]);
 
         // Handle file upload
@@ -136,7 +136,7 @@ class DocumentController extends Controller
             'nama_dokumen' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
             'tanggal_dokumen' => 'required|date',
-            'file' => 'nullable|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:10240',
+            'file' => 'nullable|file|mimes:pdf,jpg,jpeg|max:10240',
         ]);
 
         // Handle file upload if new file is provided
