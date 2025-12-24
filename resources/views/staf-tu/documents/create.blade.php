@@ -56,9 +56,9 @@
                 <label for="nomor_dokumen" class="block text-sm font-medium text-gray-700 mb-2">
                     Nomor Dokumen <span class="text-red-500">*</span>
                 </label>
-                <input type="text" id="nomor_dokumen" name="nomor_dokumen" value="{{ old('nomor_dokumen') }}" required
-                       placeholder="Contoh: DOC-001/2024"
-                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('nomor_dokumen') border-red-500 @enderror">
+                <input type="text" id="nomor_dokumen" name="nomor_dokumen" value="{{ old('nomor_dokumen') }}" required readonly
+                       placeholder="Nomor akan digenerate otomatis setelah memilih kategori"
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 cursor-not-allowed focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('nomor_dokumen') border-red-500 @enderror">
                 @error('nomor_dokumen')
                     <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                 @enderror
@@ -153,6 +153,35 @@ document.getElementById('file').addEventListener('change', function(e) {
         document.getElementById('file-name').textContent = `File dipilih: ${fileName} (${displaySize})`;
     }
 });
+
+// Dynamic Document Number
+const categorySelect = document.getElementById('category_id');
+const docNumberInput = document.getElementById('nomor_dokumen');
+
+categorySelect.addEventListener('change', function() {
+    const categoryId = this.value;
+    if (categoryId) {
+        // Show loading state or similar if needed
+        docNumberInput.value = "Generating...";
+        
+        fetch(`{{ route('staf-tu.documents.generate-number') }}?category_id=${categoryId}`)
+            .then(response => response.json())
+            .then(data => {
+                docNumberInput.value = data.number;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                docNumberInput.value = "";
+            });
+    } else {
+        docNumberInput.value = "";
+    }
+});
+
+// Trigger change if category is already selected (e.g. old input)
+if (categorySelect.value) {
+    categorySelect.dispatchEvent(new Event('change'));
+}
 </script>
 @endpush
 

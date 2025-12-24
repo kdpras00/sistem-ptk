@@ -29,8 +29,8 @@
                     Kode Kategori <span class="text-red-500">*</span>
                 </label>
                 <input type="text" name="kode_kategori" id="kode_kategori" value="{{ old('kode_kategori', $category->kode_kategori) }}" 
-                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('kode_kategori') border-red-500 @enderror" 
-                       placeholder="contoh: SK-001, IJZ-001, SRT-001" required>
+                       class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed @error('kode_kategori') border-red-500 @enderror" 
+                       placeholder="contoh: SK-001, IJZ-001, SRT-001" required readonly>
                 <p class="mt-1 text-sm text-gray-500">Kode unik untuk kategori (huruf besar tanpa spasi)</p>
                 @error('kode_kategori')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>

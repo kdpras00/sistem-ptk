@@ -17,6 +17,7 @@ class DocumentController extends Controller
      */
     public function index(Request $request)
     {
+        // dd('Reached index');
         $query = Document::with(['ptk', 'category', 'uploader']);
 
         // Search
@@ -48,8 +49,34 @@ class DocumentController extends Controller
     {
         $ptkList = PTK::orderBy('nama_lengkap')->get();
         $categories = Category::active()->get();
+        $newDocumentNumber = $this->generateDocumentNumber();
 
-        return view('staf-tu.documents.create', compact('ptkList', 'categories'));
+        return view('staf-tu.documents.create', compact('ptkList', 'categories', 'newDocumentNumber'));
+    }
+
+    /**
+     * Generate automatic document number
+     */
+    private function generateDocumentNumber()
+    {
+        $year = date('Y');
+        $prefix = "DOC-";
+        $suffix = "/{$year}";
+
+        $lastDocument = Document::where('nomor_dokumen', 'like', "{$prefix}%{$suffix}")
+            ->orderBy('id', 'desc')
+            ->first();
+
+        if (!$lastDocument) {
+            $number = 1;
+        } else {
+            // Format: DOC-001/2024
+            $parts = explode('/', $lastDocument->nomor_dokumen);
+            $numberPart = explode('-', $parts[0]);
+            $number = (int)end($numberPart) + 1;
+        }
+
+        return $prefix . str_pad($number, 3, '0', STR_PAD_LEFT) . $suffix;
     }
 
     /**
@@ -218,5 +245,53 @@ class DocumentController extends Controller
         ActivityLog::log('report', 'Mencetak laporan pengarsipan');
 
         return view('staf-tu.documents.report', compact('documents'));
+    }
+
+    /**
+     * Generate document number based on category via AJAX
+     */
+    public function generateNumber(Request $request)
+    {
+        if (!$request->has('category_id')) {
+            return response()->json(['number' => '']);
+        }
+
+        $category = Category::find($request->category_id);
+        if (!$category) {
+            return response()->json(['number' => '']);
+        }
+
+        $year = date('Y');
+        // Use Category Code as prefix, e.g. SK-001/2024
+        // If category code is just 'SK', we append '-'
+        // If it already contains '-', we use it as is? 
+        // Let's assume Category Code is just the prefix part like 'SK' or 'IJZ'.
+        // So we append '-'.
+        // But the previous auto-gen for categories made 'KTG-001'.
+        // If the user sets 'SK', then we want 'SK-001/2024'.
+        // If the user sets 'SK-001' as category code (unlikely if they followed instructions), handled too.
+        
+        $prefix = $category->kode_kategori . '-';
+        $suffix = "/{$year}";
+
+        // Find last document with this prefix and year suffix
+        $lastDocument = Document::where('nomor_dokumen', 'like', "{$prefix}%{$suffix}")
+            ->orderBy('id', 'desc')
+            ->first();
+
+        if (!$lastDocument) {
+            $number = 1;
+        } else {
+            // Format: PREFIX-001/2024
+            // exploded[0] is PREFIX-001
+            // exploded[0] parts by '-' -> last part is 001
+            $parts = explode('/', $lastDocument->nomor_dokumen);
+            $numberPart = explode('-', $parts[0]);
+            $number = (int)end($numberPart) + 1;
+        }
+
+        $newNumber = $prefix . str_pad($number, 3, '0', STR_PAD_LEFT) . $suffix;
+
+        return response()->json(['number' => $newNumber]);
     }
 }

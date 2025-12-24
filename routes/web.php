@@ -53,6 +53,7 @@ Route::middleware(['auth', 'role:staf_tu'])->prefix('staf-tu')->name('staf-tu.')
     Route::get('/dashboard', [StafTUDashboardController::class, 'index'])->name('dashboard');
     
     // Document Management
+    Route::get('/documents/generate-number', [DocumentController::class, 'generateNumber'])->name('documents.generate-number');
     Route::resource('documents', DocumentController::class);
     Route::get('/documents/{document}/download', [DocumentController::class, 'download'])->name('documents.download');
     Route::get('/report', [DocumentController::class, 'report'])->name('report');

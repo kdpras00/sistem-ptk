@@ -57,9 +57,9 @@
                 <label for="nomor_dokumen" class="block text-sm font-medium text-gray-700 mb-2">
                     Nomor Dokumen <span class="text-red-500">*</span>
                 </label>
-                <input type="text" id="nomor_dokumen" name="nomor_dokumen" value="{{ old('nomor_dokumen', $document->nomor_dokumen) }}" required
+                <input type="text" id="nomor_dokumen" name="nomor_dokumen" value="{{ old('nomor_dokumen', $document->nomor_dokumen) }}" required readonly
                        placeholder="Contoh: DOC-001/2024"
-                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('nomor_dokumen') border-red-500 @enderror">
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 cursor-not-allowed focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('nomor_dokumen') border-red-500 @enderror">
                 @error('nomor_dokumen')
                     <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                 @enderror

@@ -26,7 +26,30 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.create');
+        $newCategoryCode = $this->generateCategoryCode();
+        return view('admin.categories.create', compact('newCategoryCode'));
+    }
+
+    /**
+     * Generate automatic category code
+     */
+    private function generateCategoryCode()
+    {
+        $prefix = "KTG-";
+        
+        $lastCategory = Category::where('kode_kategori', 'like', "{$prefix}%")
+            ->orderBy('id', 'desc')
+            ->first();
+
+        if (!$lastCategory) {
+            $number = 1;
+        } else {
+            // Format: KTG-001
+            $parts = explode('-', $lastCategory->kode_kategori);
+            $number = (int)end($parts) + 1;
+        }
+
+        return $prefix . str_pad($number, 3, '0', STR_PAD_LEFT);
     }
 
     /**
