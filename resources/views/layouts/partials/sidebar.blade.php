@@ -1,7 +1,7 @@
 <!-- Sidebar Header with Logo -->
 <div class="border-b border-orange-600 w-full" style="height: 50px; display: flex; align-items: center; margin-bottom: 1rem; padding-left: 0; padding-right: 0;">
     <div class="flex items-center w-full px-5">
-            <img src="{{ asset('storage/images/logo-latansa.png') }}" alt="Logo Latansa" class="w-11 h-11 rounded-lg bg-white p-1 mb-3">
+            <img src="{{ asset('images/logo-latansa.png') }}" alt="Logo Latansa" class="w-11 h-11 rounded-lg bg-white p-1 mb-3">
         <div class="ml-3">
             <h2 class="text-white font-bold text-base leading-tight">PTK Latansa</h2>
             <p class="text-white text-xs opacity-80">Cendikia</p>

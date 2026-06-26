@@ -3,7 +3,7 @@
 @section('title', 'Login - Sistem Pengarsipan PTK')
 
 @section('content')
-<div class="flex items-center justify-center min-h-screen relative" style="background: linear-gradient(135deg, rgba(255, 145, 77, 0.8), rgba(255, 94, 20, 0.8)), url('{{ asset('storage/images/bg-latansa.jpeg') }}'); background-size: cover; background-position: center; background-attachment: fixed;">
+<div class="flex items-center justify-center min-h-screen relative" style="background: linear-gradient(135deg, rgba(255, 145, 77, 0.8), rgba(255, 94, 20, 0.8)), url('{{ asset('images/bg-latansa.png') }}'); background-size: cover; background-position: center; background-attachment: fixed;">
     <div class="w-full max-w-md">
         <!-- Login Card -->
         <div class="bg-white rounded-lg shadow-2xl overflow-hidden" style="box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);">
@@ -11,7 +11,7 @@
             <div class="px-6 pt-6 pb-0 text-center">
                 <!-- <h1 class="text-3xl font-bold text-blue-600 mb-1">Sistem Pengarsipan PTK</h1>
                 <p class="text-gray-600 text-sm mb-2">Sistem Pengarsipan Pendidikan & Tenaga Kependidikan</p> -->
-                <img src="{{ asset('storage/images/logo-latansa.png') }}" alt="Logo" class="w-20 h-20 mx-auto">
+                <img src="{{ asset('images/logo-latansa.png') }}" alt="Logo" class="w-20 h-20 mx-auto">
             </div>
 
             <!-- Form -->
